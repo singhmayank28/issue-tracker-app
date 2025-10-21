@@ -193,6 +193,22 @@ The application includes real-time notifications using Server-Sent Events:
 
 ## 🧪 Testing
 
+### E2E Testing with Playwright
+
+```bash
+# Install Playwright browsers (one-time setup)
+npx playwright install
+
+# Run basic E2E tests
+npm run test:e2e
+
+# Run tests with UI mode
+npm run test:e2e:ui
+
+# Run tests in headed mode (see browser)
+npm run test:e2e:headed
+```
+
 ### Manual Testing
 
 ```bash
