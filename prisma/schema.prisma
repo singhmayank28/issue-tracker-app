@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+
+  issues    Issue[]
+  comments  Comment[]
+}
+
+model Issue {
+  id          String      @id @default(cuid())
+  title       String
+  description String      @db.Text
+  status      IssueStatus @default(OPEN)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  authorId    String
+  author      User        @relation(fields: [authorId], references: [id])
+  comments    Comment[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  issueId   String
+  issue     Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum IssueStatus {
+  OPEN
+  CLOSED
+}
