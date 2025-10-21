@@ -1,6 +1,7 @@
 # 🎯NextJs Modern Issue Tracker Application
 
 A modern, full-stack issue tracking application built with Next.js, featuring real-time notifications, role-based permissions, and a beautiful UI.
+Deployed on vercel and can be accessed at https://issue-tracker-app-brown.vercel.app
 
 ## ✨ Features
 
